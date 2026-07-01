@@ -1,0 +1,72 @@
+# Employee Management System – Spring Boot App
+
+A complete employee management web application built with **Spring Boot, Thymeleaf, and H2 database.  
+It allows you to:
+
+- **Create** employees (name, age, designation)
+- **Display** all employees with their automatically assigned salaries
+- **Raise** an employee's salary by a percentage
+- **Exit** back to the main menu
+
+The app uses a **file‑based H2 database**, so your data persists across restarts.  
+All inputs are validated, and exceptions are handled gracefully – no terminal crashes.
+
+---
+
+## Features
+
+| 1. Create | Enter name, age, and designation (only trainer / tester / programmer). The salary is set automatically based on the designation. You then confirm before saving. |
+| 2. Display | Show all employees in a clean HTML table. |
+| 3. Raise Salary | Select an employee and enter a percentage increase. The new salary is updated. |
+| 4. Exit | Returns to the main menu (no data is lost). |
+
+# Validation & Error Handling
+- Designation must be exactly (case‑insensitive): `trainer`, `tester`, or `programmer`.
+- If you enter an invalid designation, the form shows an error and stays on the same page.
+- Raise operations fail gracefully if the employee doesn’t exist (e.g., ID changed).
+- The app never crashes on bad input – all exceptions are caught and shown as friendly error messages.
+
+### Automatic Salary Mapping
+| Designation | Base Salary |
+|-------------|-------------|
+| Trainer     | 30,000      |
+| Tester      | 35,000      |
+| Programmer  | 40,000      |
+
+---
+
+## Technology Stack
+
+- **Spring Boot** 3.2.0
+- **Thymeleaf** (server‑side rendering)
+- **Spring Data JPA** (Hibernate)
+- **H2 Database** (file‑based, `./data/employee_db`)
+- **Maven** (build tool)
+- **Java 17+**
+
+---
+
+## 📁 Project Structure
+
+src/main/java/com/example/demo/
+├── DemoApplication.java (main class)
+├── entity/
+│ └── Employee.java
+├── repository/
+│ └── EmployeeRepository.java
+├── service/
+│ └── EmployeeService.java
+└── controller/
+└── EmployeeController.java
+
+src/main/resources/
+├── application.properties
+└── templates/
+├── index.html
+├── create.html
+├── confirm.html
+├── success.html
+├── display.html
+└── raise.html
+
+
