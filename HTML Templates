@@ -1,0 +1,253 @@
+index.html:
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Employee Management</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        ul { list-style: none; padding: 0; }
+        li { margin: 10px 0; }
+        a { text-decoration: none; padding: 8px 16px; background: #007bff; color: white; border-radius: 4px; }
+        a:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <h1>Employee Management System</h1>
+    <ul>
+        <li><a href="/create">1. Create Employee</a></li>
+        <li><a href="/display">2. Display All Employees</a></li>
+        <li><a href="/raise">3. Raise Salary</a></li>
+        <li><a href="/exit">4. Exit</a></li>
+    </ul>
+</body>
+</html>
+
+
+create.html:
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Employee</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        .error { color: red; }
+        .form-group { margin: 10px 0; }
+        label { display: inline-block; width: 100px; }
+        input { padding: 5px; width: 200px; }
+    </style>
+</head>
+<body>
+    <h1>Create New Employee</h1>
+    <div th:if="${error}" class="error" th:text="${error}"></div>
+
+    <form th:action="@{/create}" th:object="${employee}" method="post">
+        <div class="form-group">
+            <label>Name:</label>
+            <input type="text" th:field="*{name}" required/>
+        </div>
+        <div class="form-group">
+            <label>Age:</label>
+            <input type="number" th:field="*{age}" min="1" required/>
+        </div>
+        <div class="form-group">
+            <label>Designation:</label>
+            <input type="text" th:field="*{designation}" placeholder="trainer / tester / programmer" required/>
+            <span style="font-size:0.9em; color:gray;">(Only: trainer, tester, programmer)</span>
+        </div>
+        <button type="submit">Next</button>
+    </form>
+    <br>
+    <a href="/">← Back to menu</a>
+</body>
+</html>
+
+confirm.html (Confirmation page)
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Confirm</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        .details { background: #f0f0f0; padding: 15px; border-radius: 5px; }
+        .btn { margin: 5px; padding: 8px 16px; }
+    </style>
+</head>
+<body>
+    <h1>Confirm Employee Details</h1>
+    <div class="details">
+        <p><strong>Name:</strong> <span th:text="${employee.name}"></span></p>
+        <p><strong>Age:</strong> <span th:text="${employee.age}"></span></p>
+        <p><strong>Designation:</strong> <span th:text="${employee.designation}"></span></p>
+        <p><strong>Salary:</strong> <span th:text="${employee.salary}"></span></p>
+    </div>
+    <p>Do you want to save this employee?</p>
+
+    <form th:action="@{/confirm}" th:object="${employee}" method="post">
+        <input type="hidden" th:field="*{name}" />
+        <input type="hidden" th:field="*{age}" />
+        <input type="hidden" th:field="*{designation}" />
+        <input type="hidden" th:field="*{salary}" />
+        <button type="submit" name="action" value="yes" class="btn" style="background:green; color:white;">Yes</button>
+        <button type="submit" name="action" value="no" class="btn" style="background:red; color:white;">No</button>
+    </form>
+    <br>
+    <a href="/">← Cancel and go to menu</a>
+</body>
+</html>
+
+
+success.html 
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Success</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        .success { color: green; font-size: 1.2em; }
+    </style>
+</head>
+<body>
+    <h1 class="success" th:text="${message}"></h1>
+    <br>
+    <a href="/">← Back to menu</a>
+</body>
+</html>
+
+display.html:
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Display Employees</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .no-data { color: gray; }
+    </style>
+</head>
+<body>
+    <h1>Employee List</h1>
+
+    <div th:if="${employees.isEmpty()}" class="no-data">
+        No employees found. <a href="/create">Create one now.</a>
+    </div>
+
+    <table th:unless="${employees.isEmpty()}">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Designation</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="emp : ${employees}">
+                <td th:text="${emp.id}"></td>
+                <td th:text="${emp.name}"></td>
+                <td th:text="${emp.age}"></td>
+                <td th:text="${emp.designation}"></td>
+                <td th:text="${emp.salary}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <a href="/">← Back to menu</a>
+</body>
+</html>
+
+
+raise.html:
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Raise Salary</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        .error { color: red; }
+        .form-group { margin: 10px 0; }
+        label { display: inline-block; width: 150px; }
+        select, input { padding: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Raise Salary</h1>
+
+    <div th:if="${error}" class="error" th:text="${error}"></div>
+
+    <div th:if="${employees.isEmpty()}">
+        <p class="error">No employees to raise salary. <a href="/create">Create one first.</a></p>
+        <a href="/">← Back to menu</a>
+    </div>
+
+    <form th:action="@{/raise}" th:object="${raiseRequest}" method="post" th:unless="${employees.isEmpty()}">
+        <div class="form-group">
+            <label>Select Employee:</label>
+            <select th:field="*{employeeId}">
+                <option th:each="emp : ${employees}" th:value="${emp.id}" th:text="${emp.name} + ' (ID: ' + ${emp.id} + ')'"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Percentage Increase (%):</label>
+            <input type="number" th:field="*{percentage}" step="0.01" min="0" required/>
+        </div>
+        <button type="submit">Raise Salary</button>
+    </form>
+    <br>
+    <a href="/">← Back to menu</a>
+</body>
+</html>
+
+
+raise.html
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Raise Salary</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        .error { color: red; }
+        .form-group { margin: 10px 0; }
+        label { display: inline-block; width: 150px; }
+        select, input { padding: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Raise Salary</h1>
+
+    <div th:if="${error}" class="error" th:text="${error}"></div>
+
+    <div th:if="${employees.isEmpty()}">
+        <p class="error">No employees to raise salary. <a href="/create">Create one first.</a></p>
+        <a href="/">← Back to menu</a>
+    </div>
+
+    <form th:action="@{/raise}" th:object="${raiseRequest}" method="post" th:unless="${employees.isEmpty()}">
+        <div class="form-group">
+            <label>Select Employee:</label>
+            <select th:field="*{employeeId}">
+                <option th:each="emp : ${employees}" th:value="${emp.id}" th:text="${emp.name} + ' (ID: ' + ${emp.id} + ')'"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Percentage Increase (%):</label>
+            <input type="number" th:field="*{percentage}" step="0.01" min="0" required/>
+        </div>
+        <button type="submit">Raise Salary</button>
+    </form>
+    <br>
+    <a href="/">← Back to menu</a>
+</body>
+</html>
+
+
+
+
