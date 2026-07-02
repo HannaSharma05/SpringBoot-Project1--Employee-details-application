@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
+
 @Table(name = "employees")
 public class Employee {
 
@@ -13,7 +14,7 @@ public class Employee {
 
     private String name;
     private int age;
-    private String designation;   // trainer, tester, programmer
+    private String designation;
     private double salary;
 
     public Employee() {}
