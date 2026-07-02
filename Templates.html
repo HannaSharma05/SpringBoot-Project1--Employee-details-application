@@ -234,5 +234,121 @@ raise.html:
 </html>
 
 
+goodbye.html:
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        /* ===== Additional inline styles (only for this page) ===== */
+        .goodbye-container {
+            text-align: center;
+            padding: 20px 10px;
+        }
+
+        .goodbye-container .icon {
+            font-size: 4.5rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .goodbye-container h1 {
+            font-size: 2.6rem;
+            color: #2d1b1b;
+            margin-bottom: 8px;
+            border-bottom: none;
+        }
+
+        .goodbye-container h1::after {
+            display: none;
+        }
+
+        .goodbye-container .sub-text {
+            font-size: 1.15rem;
+            color: #6b4f4f;
+            margin: 12px 0 20px 0;
+            line-height: 1.9;
+        }
+
+        .goodbye-container .stats {
+            background: #fdf8f8;
+            border-radius: 16px;
+            padding: 20px 28px;
+            margin: 20px 0 28px 0;
+            border: 1px solid #f0e0e0;
+            display: inline-block;
+            text-align: left;
+            min-width: 220px;
+        }
+
+        .goodbye-container .stats p {
+            margin: 6px 0;
+            font-size: 1rem;
+            color: #2d1b1b;
+        }
+
+        .goodbye-container .stats strong {
+            color: #FF4757;
+        }
+
+        .goodbye-container .btn {
+            display: inline-block;
+            padding: 14px 40px;
+            background: linear-gradient(135deg, #FF6B6B, #FF4757);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 14px rgba(255, 71, 87, 0.30);
+            margin-top: 8px;
+        }
+
+        .goodbye-container .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 71, 87, 0.45);
+            background: linear-gradient(135deg, #FF3838, #FF1E1E);
+        }
+
+        .goodbye-container .footer-note {
+            margin-top: 30px;
+            color: #b39b9b;
+            font-size: 0.85rem;
+            border-top: 1px solid #f0e0e0;
+            padding-top: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container goodbye-container">
+
+        <!-- Large icon -->
+        <span class="icon">🙏</span>
+
+        <!-- Main title -->
+        <h1>Thank You!</h1>
+
+        <!-- Subtext -->
+        <p class="sub-text">
+            You have successfully exited the <strong>Employee Management System</strong>.<br>
+            We hope to see you again soon.
+        </p>
+
+       
+        <!-- Return button -->
+        <a href="/" class="btn">← Return to Main Menu</a>
+
+        <!-- Footer note -->
+        
+    </div>
+</body>
+</html>
+
+
 
 
