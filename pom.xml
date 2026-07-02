@@ -1,5 +1,3 @@
-
-xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -11,38 +9,42 @@ xml
 		<relativePath/>
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>employee-app</artifactId>
+	<artifactId>EmployeeApp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>employee-app</name>
-	<description>Employee management with H2</description>
+	<name>EmployeeApp</name>
+	<description>Employee Management Application</description>
 
 	<properties>
 		<java.version>17</java.version>
 	</properties>
 
 	<dependencies>
-		<!-- Web + Thymeleaf -->
+		<!-- Web (REST APIs, Tomcat, MVC) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
+		<!-- Thymeleaf (HTML templates) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 
-		<!-- JPA + H2 -->
+		<!-- JPA / Hibernate (Database access) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+
+		<!-- H2 Database -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- DevTools (optional) -->
+		<!-- DevTools (hot reload, optional) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -50,7 +52,7 @@ xml
 			<optional>true</optional>
 		</dependency>
 
-		<!-- Test -->
+		<!-- Testing -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -66,4 +68,5 @@ xml
 			</plugin>
 		</plugins>
 	</build>
+
 </project>
