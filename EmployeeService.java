@@ -41,11 +41,11 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public Optional<Employee> findEmployeeById(Long id) {
+    public Optional<Employee> findEmployeeById(Integer id) {
         return employeeRepository.findById(id);
     }
 
-    public Employee raiseSalary(Long id, double percentage) {
+    public Employee raiseSalary(Integer id, double percentage) {
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Employee not found with id: " + id));
         double increment = employee.getSalary() * (percentage / 100.0);
