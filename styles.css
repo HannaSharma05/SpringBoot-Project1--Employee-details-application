@@ -1,0 +1,355 @@
+/* ============================================
+   TOKENS
+   ============================================ */
+:root {
+    /* Palette — warm coral refined into a tighter, more intentional range */
+    --surface:       #faf5f4;
+    --surface-card:  #ffffff;
+    --border-soft:   #ecdad8;
+    --border-hover:  #e8635a;
+
+    --accent:        #e14b44;
+    --accent-deep:   #c13830;
+    --accent-glow:   rgba(225, 75, 68, 0.14);
+    --accent-glow-strong: rgba(225, 75, 68, 0.22);
+
+    --text-primary:  #2a1a19;
+    --text-secondary:#8c706e;
+    --text-muted:    #b89e9c;
+
+    /* Type */
+    --font-display: 'Georgia', 'Times New Roman', serif;
+    --font-body:    'Segoe UI', system-ui, -apple-system, sans-serif;
+
+    /* Spacing scale (4px base) */
+    --sp-1: 4px;
+    --sp-2: 8px;
+    --sp-3: 12px;
+    --sp-4: 16px;
+    --sp-5: 20px;
+    --sp-6: 24px;
+    --sp-8: 32px;
+    --sp-10: 40px;
+    --sp-12: 48px;
+
+    /* Radii */
+    --r-sm: 12px;
+    --r-md: 20px;
+    --r-lg: 28px;
+    --r-full: 50%;
+
+    /* Shadows */
+    --shadow-rest:  0 1px 3px rgba(42, 26, 25, 0.04),
+                    0 8px 24px rgba(225, 75, 68, 0.06);
+    --shadow-lift:  0 4px 12px rgba(42, 26, 25, 0.05),
+                    0 16px 48px rgba(225, 75, 68, 0.12);
+    --shadow-card:  0 1px 2px rgba(42, 26, 25, 0.03);
+    --shadow-card-hover: 0 8px 28px rgba(225, 75, 68, 0.13);
+
+    /* Transitions */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --duration: 0.25s;
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--surface);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--sp-5);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Subtle grain texture via background — gives the page surface a tactile feel */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 20% 0%, rgba(225, 75, 68, 0.06) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 100%, rgba(225, 75, 68, 0.04) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ============================================
+   CONTAINER
+   ============================================ */
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    width: 100%;
+    background: var(--surface-card);
+    padding: var(--sp-10) var(--sp-12);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-rest);
+    border: 1px solid var(--border-soft);
+    transition: box-shadow var(--duration) var(--ease-out);
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.header {
+    margin-bottom: var(--sp-8);
+    text-align: center;
+}
+
+.header h1 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    padding-bottom: var(--sp-4);
+    position: relative;
+    display: inline-block;
+}
+
+/* Single clean underline — asymmetric left-aligned stroke */
+.header h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 48px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-top: var(--sp-3);
+    font-weight: 400;
+    line-height: 1.65;
+    max-width: 480px;
+    margin-inline: auto;
+}
+
+/* ============================================
+   MENU LIST
+   ============================================ */
+.menu-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+    margin: var(--sp-6) 0 var(--sp-8) 0;
+}
+
+.menu-link {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-4);
+    padding: var(--sp-4) var(--sp-5);
+    background: var(--surface-card);
+    color: var(--text-primary);
+    text-decoration: none;
+    border-radius: var(--r-sm);
+    font-weight: 600;
+    font-size: 1rem;
+    border: 1.5px solid var(--border-soft);
+    box-shadow: var(--shadow-card);
+    cursor: pointer;
+    transition:
+        transform var(--duration) var(--ease-out),
+        box-shadow var(--duration) var(--ease-out),
+        border-color var(--duration) var(--ease-out),
+        background-color var(--duration) var(--ease-out);
+}
+
+/* ---- Icon ---- */
+.menu-link .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: var(--r-full);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    transition:
+        transform var(--duration) var(--ease-out),
+        background-color var(--duration) var(--ease-out),
+        box-shadow var(--duration) var(--ease-out);
+}
+
+/* ---- Text ---- */
+.menu-link .text {
+    flex: 1;
+    line-height: 1.4;
+}
+
+/* ---- Arrow ---- */
+.menu-link .arrow {
+    color: var(--text-muted);
+    font-size: 1rem;
+    transition:
+        transform var(--duration) var(--ease-out),
+        color var(--duration) var(--ease-out);
+}
+
+/* ---- Hover ---- */
+.menu-link:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-card-hover);
+    background: linear-gradient(
+        to right,
+        rgba(225, 75, 68, 0.03),
+        transparent 60%
+    );
+}
+
+.menu-link:hover .icon {
+    transform: scale(1.06);
+    background: var(--accent-deep);
+    box-shadow: 0 4px 14px var(--accent-glow-strong);
+}
+
+.menu-link:hover .arrow {
+    transform: translateX(3px);
+    color: var(--accent);
+}
+
+/* ---- Active / press ---- */
+.menu-link:active {
+    transform: translateY(0) scale(0.98);
+    transition-duration: 0.08s;
+}
+
+/* ---- Focus visible (keyboard) ---- */
+.menu-link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-color: var(--accent);
+}
+
+/* ---- Exit / destructive variant (last item) ---- */
+.menu-list li:last-child .icon {
+    background: var(--text-secondary);
+}
+
+.menu-list li:last-child .menu-link:hover {
+    border-color: var(--text-secondary);
+}
+
+.menu-list li:last-child .menu-link:hover .icon {
+    background: var(--text-primary);
+    box-shadow: 0 4px 14px rgba(42, 26, 25, 0.18);
+}
+
+.menu-list li:last-child .menu-link:hover .arrow {
+    color: var(--text-primary);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+    text-align: center;
+    margin-top: var(--sp-2);
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--border-soft);
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+
+    .menu-link:hover {
+        transform: none;
+    }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 600px) {
+    .container {
+        padding: var(--sp-6) var(--sp-5);
+        border-radius: var(--r-md);
+    }
+
+    .header h1 {
+        font-size: 1.5rem;
+        padding-bottom: var(--sp-3);
+    }
+
+    .header h1::after {
+        width: 36px;
+    }
+
+    .subtitle {
+        font-size: 0.88rem;
+    }
+
+    .menu-link {
+        padding: var(--sp-3) var(--sp-4);
+        font-size: 0.95rem;
+        gap: var(--sp-3);
+    }
+
+    .menu-link .icon {
+        width: 36px;
+        height: 36px;
+        font-size: 0.95rem;
+    }
+	
+	button[type="submit"] {
+	    padding: 14px 40px;
+	    background: linear-gradient(135deg, #FF6B6B, #FF4757);
+	    color: white;
+	    border: none;
+	    border-radius: 50px;
+	    font-size: 1.1rem;
+	    font-weight: 600;
+	    cursor: pointer;
+	    transition: all 0.3s ease;
+	    box-shadow: 0 4px 16px rgba(255, 71, 87, 0.35);
+	    letter-spacing: 0.5px;
+	}
+
+	button[type="submit"]:hover {
+	    transform: translateY(-3px);
+	    box-shadow: 0 8px 28px rgba(255, 71, 87, 0.50);
+	    background: linear-gradient(135deg, #FF3838, #FF1E1E);
+	}
+
+	button[type="submit"]:active {
+	    transform: scale(0.96);
+	}
+}
