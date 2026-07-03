@@ -1,8 +1,6 @@
-/* ============================================
-   TOKENS
-   ============================================ */
+
 :root {
-    /* Palette — warm coral refined into a tighter, more intentional range */
+   
     --surface:       #faf5f4;
     --surface-card:  #ffffff;
     --border-soft:   #ecdad8;
@@ -21,7 +19,6 @@
     --font-display: 'Georgia', 'Times New Roman', serif;
     --font-body:    'Segoe UI', system-ui, -apple-system, sans-serif;
 
-    /* Spacing scale (4px base) */
     --sp-1: 4px;
     --sp-2: 8px;
     --sp-3: 12px;
